@@ -35,7 +35,3 @@ def stonecutting():
 
 def smithing():
     pass
-
-
-def smithing():
-    pass

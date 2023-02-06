@@ -178,12 +178,8 @@ stt = state
 sv = state_value
 
 
-def test():
+if __name__ == "__main__":
     print(state({"kk": "ky", "ll": "ly", "mm": "my", "b0": False, "b1": True}))
     print(states(["a", "b"], [["1", "2"], ["_", "?"]]))
     print(states(["face", "facing", "powered"], [face, facing, boolean]))
     print(curved_rail)
-
-
-if __name__ == "__main__":
-    test()

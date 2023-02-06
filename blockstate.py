@@ -132,7 +132,7 @@ def pressure_plate(name):
 
 def slab(name, double=None):
     b = o.va("type=bottom", o.mo("%s_slab" % name))
-    d = o.va("type=double", o.mo(h.ntx(double, "%s_slab_double" % name)))
+    d = o.va("type=double", o.mo(double or "%s_slab_double" % name))
     t = o.va("type=top", o.mo("%s_slab_top" % name))
     write("%s_slab" % name, o.vs([b, d, t]))
 
@@ -328,10 +328,10 @@ def cauldron(name, has_levels=True):
         cube("%s_cauldron" % name)
 
 
-def test():
+if __name__ == "__main__":
     h.is_testing = True
-    i = input("Testing Blockstate Creation\nFull parameters? [Y] / [N]\n")
-    if i == "Y":
+    use_all_params = input("Testing Blockstate Creation\nFull parameters? [Y] / [N]\n")
+    if use_all_params == "Y":
         cube("xx", mirrored=True)
         grass_block("xx", "yy")
         pillar("xx", True)
@@ -356,7 +356,7 @@ def test():
         fire("xx", True)
         mushroom_block("xx", True, False)
         cauldron("xx", False)
-    elif i == "N":
+    elif use_all_params == "N":
         cube("xx")
         grass_block("xx")
         pillar("xx")
@@ -382,7 +382,3 @@ def test():
         mushroom_block("xx")
         cauldron("xx")
     h.is_testing = False
-
-
-if __name__ == "__main__":
-    test()

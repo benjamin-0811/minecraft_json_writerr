@@ -12,7 +12,7 @@ def item(name, textures=None):
     - textures = name
     - enter a list of textures for multiple layers
     """
-    textures = h.ntx(textures, name)
+    textures = textures or name
     if isinstance(textures, list):
         keys = []
         for i in range(len(textures)):
@@ -29,14 +29,14 @@ def item_parent(name, item_model=None, particle=None):
     - particle: bed, shulker_box
     """
     key = None if particle is None else "particle"
-    h.write(name, j.dumps(o.cim(h.ntx(item_model, name), True, key, particle), indent=2), h.Results.ITEM_MODEL)
+    h.write(name, j.dumps(o.cim(item_model or name, True, key, particle), indent=2), h.Results.ITEM_MODEL)
 
 
 def block_parent(name, block_model=None):
     """
     - block_model = name
     """
-    h.write(name, j.dumps(o.cbm(h.ntx(block_model, name)), indent=2), h.Results.ITEM_MODEL)
+    h.write(name, j.dumps(o.cbm(block_model or name), indent=2), h.Results.ITEM_MODEL)
 
 
 def handheld(name, textures=None, rod=False):
@@ -45,7 +45,7 @@ def handheld(name, textures=None, rod=False):
     - examples: sword, tools, bamboo, blaze_rod, stick, bone
     - rod: fishing_rods
     """
-    textures = h.ntx(textures, name)
+    textures = textures or name
     if isinstance(textures, list):
         keys = []
         for i in range(len(textures)):
@@ -55,21 +55,17 @@ def handheld(name, textures=None, rod=False):
     write(name, "handheld_rod" if rod else "handheld", True, keys, textures)
 
 
-def test():
+if __name__ == "__main__":
     h.is_testing = True
-    i = input("Testing Item Model Creation\nFull parameters? [Y] / [N]\n")
-    if i == "Y":
+    use_all_params = input("Testing Item Model Creation\nFull parameters? [Y] / [N]\n")
+    if use_all_params == "Y":
         item("xx", ["yy", "zz", "uu", "vv"])
         item_parent("xx", "yy", "zz")
         block_parent("xx", "yy")
         handheld("xx", ["yy", "zz", "uu", "vv"], True)
-    elif i == "N":
+    elif use_all_params == "N":
         item("xx")
         item_parent("xx")
         block_parent("xx")
         handheld("xx")
     h.is_testing = False
-
-
-if __name__ == "__main__":
-    test()

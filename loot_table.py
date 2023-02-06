@@ -21,7 +21,7 @@ def insni(maybe_none, x):
     :param x: value 2 (should not be None)
     :return: "minecraft:item/<x>" if maybe_none is None, maybe_none anytime else
     """
-    return h.none_to_x(maybe_none, h.item(x, h.current_id))
+    return maybe_none or h.item(x, h.current_id)
 
 
 def insmi(maybe_none, x):
@@ -32,7 +32,7 @@ def insmi(maybe_none, x):
     :param x: value 2 (should not be None)
     :return: "minecraft:item/<x>" if maybe_none is None, maybe_none anytime else
     """
-    return h.none_to_x(maybe_none, h.item(x, "minecraft"))
+    return maybe_none or h.item(x, "minecraft")
 
 
 def write(name, text, result_dir=h.Results.LOOT_TABLE):
@@ -301,7 +301,7 @@ def fruit_bush(name, block=None, item=None, plural_item=True, amm=None):
     """
     block = insni(block, "%s_bush" % name)
     item = insni(item, name.replace("berry", "berries") if "berry" in name and plural_item else name)
-    amm = h.none_to_x(amm, [[3, 2.0, 3.0], [2, 1.0, 2.0]])
+    amm = amm or [[3, 2.0, 3.0], [2, 1.0, 2.0]]
     pools = []
     for i in range(len(amm)):
         cur_tri = amm[i]
@@ -353,15 +353,11 @@ def fish(name, item=None, has_cooked_fish=True, bone_meal_chance=0.05):
     write(name, o.elt([p0, p1]), res_entity)
 
 
-def test():
+if __name__ == "__main__":
     h.is_testing = True
-    i = input("Testing Loot Table Creation\nFull parameters? [Y] / [N]\n")
-    if i == "Y":
+    use_all_params = input("Testing Loot Table Creation\nFull parameters? [Y] / [N]\n")
+    if use_all_params == "Y":
         pass
-    elif i == "N":
+    elif use_all_params == "N":
         pass
     h.is_testing = False
-
-
-if __name__ == "__main__":
-    test()

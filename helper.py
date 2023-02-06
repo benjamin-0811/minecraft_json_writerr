@@ -1,12 +1,14 @@
 import os
 # import random
 from typing import List
+from dataclasses import dataclass
 
 
 is_testing = False
 current_id = "minecraft"
 
 
+@dataclass
 class Templates:
     ROOT = os.path.abspath(os.curdir) + "\\templates"
     BLOCK_MODEL = ROOT + "\\block_model"
@@ -16,6 +18,7 @@ class Templates:
     LOOT_TABLE = ROOT + "\\loot_table"
 
 
+@dataclass
 class Results:
     ROOT = os.path.abspath(os.curdir) + "\\results"
     BLOCK_MODEL = ROOT + "\\block_model"

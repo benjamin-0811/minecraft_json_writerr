@@ -505,10 +505,10 @@ def fluid(name, texture=None, has_levels=False):
         h.write(c, j.dumps(o.cm(f"{tmpl}_full", *p), indent=2), res)
 
 
-def test():
+if __name__ == "__main__":
     h.is_testing = True
-    i = input("Testing Block Model Creation\nFull parameters? [Y] / [N]\n")
-    if i == "Y":
+    use_all_params = input("Testing Block Model Creation\nFull parameters? [Y] / [N]\n")
+    if use_all_params == "Y":
         cube("xx", "yy", True)
         pillar("xx", "yy", "zz")
         bottom_top("xx", "yy", "zz", "uu")
@@ -542,7 +542,7 @@ def test():
         wood_set("xx")
         coral("xx", "yy", "zz", "uu", "dyy", "dzz", "duu")
         fluid("xx", "yy", True)
-    elif i == "N":
+    elif use_all_params == "N":
         cube("xx")
         pillar("xx")
         bottom_top("xx")
@@ -577,7 +577,3 @@ def test():
         coral("xx")
         fluid("xx")
     h.is_testing = False
-
-
-if __name__ == "__main__":
-    test()
